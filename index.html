@@ -21,9 +21,14 @@
   display: none;
 }
 
-#cards img {
-    height: 40%;
+#cards div {
+  display: inline;
 }
+
+#cards img {
+  width: 20%;
+}
+
 </style>
 <script>
 function shuffle(array) {
@@ -106,16 +111,14 @@ function black() {
 </head>
 <body>
 <div id="cards">
-<ul>
-<li><a href="javascript:select(1)"><img id="1" src=""></a></li>
-<li><a href="javascript:select(2)"><img id="2" src=""></a></li>
-<li><a href="javascript:select(3)"><img id="3" src=""></a></li>
-<li><a href="javascript:select(4)"><img id="4" src=""></a></li>
-<li><a href="javascript:select(5)"><img id="5" src=""></a></li>
-<li><a href="javascript:select(6)"><img id="6" src=""></a></li>
-<li><a href="javascript:select(7)"><img id="7" src=""></a></li>
-</ul>
-<a href="javascript:black()">Show black card</a>
+<div><a href="javascript:select(1)"><img id="1" src=""></a></div>
+<div><a href="javascript:select(2)"><img id="2" src=""></a></div>
+<div><a href="javascript:select(3)"><img id="3" src=""></a></div>
+<div><a href="javascript:select(4)"><img id="4" src=""></a></div>
+<div><a href="javascript:select(5)"><img id="5" src=""></a></div>
+<div><a href="javascript:select(6)"><img id="6" src=""></a></div>
+<div><a href="javascript:select(7)"><img id="7" src=""></a></div>
+<div id="black"><a href="javascript:black()"><img src="black_blank.jpg"></a></div>
 </div>
 <div id="selected" class="hidden">
 <a href="javascript:done()"><img id="selected-card" src=""></a>
