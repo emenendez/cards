@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<style>
+#selected {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#selected-card {
+  height: 100%;
+}
+    
+.hidden {
+  display: none;
+}
+
+#cards img {
+    height: 40%;
+}
+</style>
+<script>
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+$(function () {
+    deck = [
+        ['white_card_0.jpg', 'white_card_1.jpg', 'white_card_10.jpg', 'white_card_100.jpg', 'white_card_101.jpg', 'white_card_102.jpg', 'white_card_104.jpg', 'white_card_105.jpg', 'white_card_106.jpg', 'white_card_107.jpg', 'white_card_109.jpg', 'white_card_11.jpg', 'white_card_110.jpg', 'white_card_111.jpg', 'white_card_113.jpg', 'white_card_114.jpg', 'white_card_115.jpg', 'white_card_117.jpg', 'white_card_118.jpg', 'white_card_119.jpg', 'white_card_12.jpg', 'white_card_120.jpg', 'white_card_121.jpg', 'white_card_122.jpg', 'white_card_123.jpg', 'white_card_124.jpg', 'white_card_125.jpg', 'white_card_126.jpg', 'white_card_127.jpg', 'white_card_128.jpg', 'white_card_129.jpg', 'white_card_130.jpg', 'white_card_131.jpg', 'white_card_132.jpg', 'white_card_133.jpg', 'white_card_134.jpg', 'white_card_135.jpg', 'white_card_136.jpg', 'white_card_137.jpg', 'white_card_138.jpg', 'white_card_139.jpg', 'white_card_14.jpg', 'white_card_140.jpg', 'white_card_141.jpg', 'white_card_142.jpg', 'white_card_143.jpg', 'white_card_145.jpg', 'white_card_146.jpg', 'white_card_147.jpg'],
+        ['white_card_15.jpg', 'white_card_150.jpg', 'white_card_151.jpg', 'white_card_153.jpg', 'white_card_154.jpg', 'white_card_155.jpg', 'white_card_156.jpg', 'white_card_157.jpg', 'white_card_158.jpg', 'white_card_159.jpg', 'white_card_16.jpg', 'white_card_160.jpg', 'white_card_161.jpg', 'white_card_162.jpg', 'white_card_163.jpg', 'white_card_164.jpg', 'white_card_165.jpg', 'white_card_166.jpg', 'white_card_167.jpg', 'white_card_168.jpg', 'white_card_169.jpg', 'white_card_170.jpg', 'white_card_171.jpg', 'white_card_172.jpg', 'white_card_173.jpg', 'white_card_174.jpg', 'white_card_175.jpg', 'white_card_176.jpg', 'white_card_177.jpg', 'white_card_178.jpg', 'white_card_179.jpg', 'white_card_180.jpg', 'white_card_181.jpg', 'white_card_182.jpg', 'white_card_183.jpg', 'white_card_184.jpg', 'white_card_185.jpg', 'white_card_186.jpg', 'white_card_187.jpg', 'white_card_188.jpg', 'white_card_189.jpg', 'white_card_19.jpg', 'white_card_190.jpg', 'white_card_191.jpg', 'white_card_192.jpg', 'white_card_193.jpg', 'white_card_194.jpg', 'white_card_195.jpg', 'white_card_196.jpg'],
+        ['white_card_197.jpg', 'white_card_149.jpg', 'white_card_198.jpg', 'white_card_199.jpg', 'white_card_2.jpg', 'white_card_20.jpg', 'white_card_200.jpg', 'white_card_201.jpg', 'white_card_202.jpg', 'white_card_203.jpg', 'white_card_204.jpg', 'white_card_205.jpg', 'white_card_206.jpg', 'white_card_208.jpg', 'white_card_209.jpg', 'white_card_21.jpg', 'white_card_210.jpg', 'white_card_212.jpg', 'white_card_213.jpg', 'white_card_214.jpg', 'white_card_217.jpg', 'white_card_218.jpg', 'white_card_219.jpg', 'white_card_221.jpg', 'white_card_222.jpg', 'white_card_223.jpg', 'white_card_226.jpg', 'white_card_227.jpg', 'white_card_228.jpg', 'white_card_23.jpg', 'white_card_230.jpg', 'white_card_231.jpg', 'white_card_232.jpg', 'white_card_235.jpg', 'white_card_236.jpg', 'white_card_237.jpg', 'white_card_239.jpg', 'white_card_24.jpg', 'white_card_240.jpg', 'white_card_241.jpg', 'white_card_244.jpg', 'white_card_245.jpg', 'white_card_246.jpg', 'white_card_248.jpg', 'white_card_249.jpg', 'white_card_25.jpg', 'white_card_250.jpg', 'white_card_253.jpg', 'white_card_254.jpg'],
+        ['white_card_255.jpg', 'white_card_257.jpg', 'white_card_258.jpg', 'white_card_259.jpg', 'white_card_262.jpg', 'white_card_263.jpg', 'white_card_264.jpg', 'white_card_266.jpg', 'white_card_267.jpg', 'white_card_268.jpg', 'white_card_271.jpg', 'white_card_272.jpg', 'white_card_273.jpg', 'white_card_275.jpg', 'white_card_276.jpg', 'white_card_277.jpg', 'white_card_28.jpg', 'white_card_280.jpg', 'white_card_281.jpg', 'white_card_282.jpg', 'white_card_284.jpg', 'white_card_285.jpg', 'white_card_286.jpg', 'white_card_289.jpg', 'white_card_29.jpg', 'white_card_290.jpg', 'white_card_291.jpg', 'white_card_293.jpg', 'white_card_294.jpg', 'white_card_295.jpg', 'white_card_298.jpg', 'white_card_299.jpg', 'white_card_3.jpg', 'white_card_30.jpg', 'white_card_300.jpg', 'white_card_302.jpg', 'white_card_303.jpg', 'white_card_304.jpg', 'white_card_307.jpg', 'white_card_308.jpg', 'white_card_309.jpg', 'white_card_311.jpg', 'white_card_312.jpg', 'white_card_313.jpg', 'white_card_316.jpg', 'white_card_317.jpg', 'white_card_318.jpg', 'white_card_32.jpg', 'white_card_320.jpg'],
+        ['white_card_321.jpg', 'white_card_322.jpg', 'white_card_33.jpg', 'white_card_34.jpg', 'white_card_37.jpg', 'white_card_38.jpg', 'white_card_39.jpg', 'white_card_41.jpg', 'white_card_42.jpg', 'white_card_43.jpg', 'white_card_46.jpg', 'white_card_47.jpg', 'white_card_48.jpg', 'white_card_5.jpg', 'white_card_50.jpg', 'white_card_51.jpg', 'white_card_52.jpg', 'white_card_55.jpg', 'white_card_56.jpg', 'white_card_57.jpg', 'white_card_59.jpg', 'white_card_6.jpg', 'white_card_60.jpg', 'white_card_61.jpg', 'white_card_64.jpg', 'white_card_65.jpg', 'white_card_66.jpg', 'white_card_68.jpg', 'white_card_69.jpg', 'white_card_7.jpg', 'white_card_70.jpg', 'white_card_73.jpg', 'white_card_74.jpg', 'white_card_75.jpg', 'white_card_77.jpg', 'white_card_78.jpg', 'white_card_79.jpg', 'white_card_82.jpg', 'white_card_83.jpg', 'white_card_84.jpg', 'white_card_86.jpg', 'white_card_87.jpg', 'white_card_88.jpg', 'white_card_91.jpg', 'white_card_92.jpg', 'white_card_93.jpg', 'white_card_95.jpg', 'white_card_96.jpg', 'white_card_97.jpg']
+        ];
+
+    black_deck = [
+        ['black_card_103.jpg', 'black_card_108.jpg', 'black_card_112.jpg', 'black_card_116.jpg', 'black_card_13.jpg', 'black_card_144.jpg', 'black_card_148.jpg', 'black_card_152.jpg', 'black_card_17.jpg', 'black_card_18.jpg', 'black_card_207.jpg', 'black_card_211.jpg', 'black_card_215.jpg', 'black_card_216.jpg', 'black_card_22.jpg', 'black_card_220.jpg'],
+        ['black_card_224.jpg', 'black_card_225.jpg', 'black_card_229.jpg', 'black_card_233.jpg', 'black_card_234.jpg', 'black_card_238.jpg', 'black_card_242.jpg', 'black_card_243.jpg', 'black_card_247.jpg', 'black_card_251.jpg', 'black_card_252.jpg', 'black_card_256.jpg', 'black_card_26.jpg', 'black_card_260.jpg', 'black_card_261.jpg', 'black_card_265.jpg'],
+        ['black_card_27.jpg', 'black_card_270.jpg', 'black_card_274.jpg', 'black_card_278.jpg', 'black_card_279.jpg', 'black_card_283.jpg', 'black_card_287.jpg', 'black_card_288.jpg', 'black_card_292.jpg', 'black_card_296.jpg', 'black_card_297.jpg', 'black_card_301.jpg', 'black_card_305.jpg', 'black_card_306.jpg', 'black_card_31.jpg', 'black_card_310.jpg'],
+        ['black_card_315.jpg', 'black_card_319.jpg', 'black_card_323.jpg', 'black_card_35.jpg', 'black_card_36.jpg', 'black_card_4.jpg', 'black_card_40.jpg', 'black_card_44.jpg', 'black_card_45.jpg', 'black_card_49.jpg', 'black_card_53.jpg', 'black_card_54.jpg', 'black_card_58.jpg', 'black_card_62.jpg', 'black_card_63.jpg', 'black_card_67.jpg'],
+        ['black_card_72.jpg', 'black_card_76.jpg', 'black_card_8.jpg', 'black_card_80.jpg', 'black_card_81.jpg', 'black_card_85.jpg', 'black_card_89.jpg', 'black_card_9.jpg', 'black_card_90.jpg', 'black_card_94.jpg', 'black_card_98.jpg', 'black_card_99.jpg', 'black_card_269.jpg', 'black_card_314.jpg', 'black_card_71.jpg']
+        ];
+
+
+     player = parseInt(window.location.hash.substring(1));
+     cards = shuffle(deck[player]);
+     black_cards = shuffle(black_deck[player]);
+ 
+     for(id=1; id<8; id++) {
+        $('#'+id).attr('src', cards[id-1])
+     }
+     next_card = 7;
+     next_black_card = 0;
+});
+
+function select(card) {
+    if(next_card >= cards.length) {
+        alert('game over');
+    }
+
+    src = $('#'+card).attr('src');
+    $('#selected-card').attr('src', src);
+    $('#selected').toggleClass('hidden');
+    $('#cards').toggleClass('hidden');
+    $('#'+card).attr('src', cards[next_card]);
+    next_card++;
+}
+
+function done() {
+    $('#selected').toggleClass('hidden');
+    $('#cards').toggleClass('hidden');
+}
+
+function black() {
+    if(next_black_card >= black_cards.length) {
+        alert('game over');
+    }
+
+    $('#selected-card').attr('src', black_cards[next_black_card]);
+    $('#selected').toggleClass('hidden');
+    $('#cards').toggleClass('hidden');
+    next_black_card++;
+}
+</script>
+</head>
+<body>
+<div id="cards">
+<ul>
+<li><a href="javascript:select(1)"><img id="1" src=""></a></li>
+<li><a href="javascript:select(2)"><img id="2" src=""></a></li>
+<li><a href="javascript:select(3)"><img id="3" src=""></a></li>
+<li><a href="javascript:select(4)"><img id="4" src=""></a></li>
+<li><a href="javascript:select(5)"><img id="5" src=""></a></li>
+<li><a href="javascript:select(6)"><img id="6" src=""></a></li>
+<li><a href="javascript:select(7)"><img id="7" src=""></a></li>
+</ul>
+<a href="javascript:black()">Show black card</a>
+</div>
+<div id="selected" class="hidden">
+<a href="javascript:done()"><img id="selected-card" src=""></a>
+</div>
+</body>
+</html>
