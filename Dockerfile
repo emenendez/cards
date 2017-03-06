@@ -1,8 +1,4 @@
-FROM python:2.7
+FROM nginx
 
-WORKDIR /deploy
-
-COPY *.jpg /deploy/
-COPY index.html /deploy/
-
-CMD python -m SimpleHTTPServer 80
+COPY cards/* /usr/share/nginx/html/cards/
+COPY index.html /usr/share/nginx/html/
