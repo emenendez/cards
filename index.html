@@ -68,7 +68,7 @@ $(function () {
         ];
 
 
-     player = parseInt(window.location.hash.substring(1));
+     player = parseInt(window.location.hash.substring(1)) - 1;
      cards = shuffle(deck[player]);
      black_cards = shuffle(black_deck[player]);
  
